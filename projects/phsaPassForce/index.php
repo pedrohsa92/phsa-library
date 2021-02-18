@@ -50,7 +50,7 @@
 						btnControlType: 	true,
 						consoleLog: 		true,
 						passTrim: 			true,
-						minLenght: 			6,
+						// minLenght: 			6,
 						maxLenght: 			20
 					}
 				);
