@@ -49,10 +49,6 @@ function outputPassForce(phsaPassForce){
         }
     }
 
-    if (phsaPassForce.consoleLog==true) {
-        console.log(phsaPassForce.log);
-    }
-
     if (phsaPassForce.status==true) {
         if (phsaPassForce.btnControl!='') {
             if (phsaPassForce.btnControlType==true) {
@@ -74,6 +70,14 @@ function outputPassForce(phsaPassForce){
             }
         }
     }
+
+    if (phsaPassForce.consoleLog==true) {
+        console.log(phsaPassForce.log);
+    }
+
+    if (phsaPassForce.debugLog==true) {
+        console.log(phsaPassForce);
+    }
 }
 
 // phsaPassForce
@@ -89,6 +93,7 @@ function phsaPassForce( input, params="") {
             classWarning:       null,
             classDanger:        null,
             consoleLog:         null,
+            debugLog:           null,
             passTrim:           null,
             minLenght:          null,
             maxLenght:          null,
@@ -105,6 +110,7 @@ function phsaPassForce( input, params="") {
     params.classWarning = validateParam(params.classWarning, 'small text-warning');
     params.classDanger  = validateParam(params.classDanger, 'small text-danger');
     params.consoleLog   = validateParam(params.consoleLog, false);
+    params.debugLog     = validateParam(params.debugLog, false);
 
     // btnControl
     params.btnControl           = validateParam(params.btnControl, '');
@@ -127,6 +133,7 @@ function phsaPassForce( input, params="") {
         htmlOutputRule: "",
         consoleLog:     params.consoleLog,
         log:            "Iniciando phsaPassForce...",
+        debugLog:       params.debugLog,
         debug:  {
             password:   password,
             params:     params
@@ -214,6 +221,7 @@ function phsaPassForce( input, params="") {
 
     // Remove space white
     password = params.passTrim==true?password.trim():password;
+    phsaPassForce.debug.password = password;
 
     // validateParam (value, default, type)
     params.minLenght = validateParam(params.minLenght, 0, 'numeric');
@@ -405,28 +413,34 @@ function phsaPassForce( input, params="") {
     }
 
     // Validation rules
-    if (phsaPassForce.totalLowKey<params.rule.minLowKey){
-        phsaPassForce.info = 'É necessário '+params.rule.minLowKey+' caractere(s) minúsculo!';
-        phsaPassForce.log = phsaPassForce.log + "\n" + phsaPassForce.info;
-        return outputPassForce(phsaPassForce);
+    if ( params.typePass!='numeric' ) {
+        if (phsaPassForce.totalLowKey<params.rule.minLowKey){
+            phsaPassForce.info = 'É necessário '+params.rule.minLowKey+' caractere(s) minúsculo!';
+            phsaPassForce.log = phsaPassForce.log + "\n" + phsaPassForce.info;
+            return outputPassForce(phsaPassForce);
+        }
+
+        if (phsaPassForce.totalUpperKey<params.rule.minUpperKey){
+            phsaPassForce.info = 'É necessário '+params.rule.minUpperKey+' caractere(s) maiúsculo!';
+            phsaPassForce.log = phsaPassForce.log + "\n" + phsaPassForce.info;
+            return outputPassForce(phsaPassForce);
+        }
     }
 
-    if (phsaPassForce.totalUpperKey<params.rule.minUpperKey){
-        phsaPassForce.info = 'É necessário '+params.rule.minUpperKey+' caractere(s) maiúsculo!';
-        phsaPassForce.log = phsaPassForce.log + "\n" + phsaPassForce.info;
-        return outputPassForce(phsaPassForce);
+    if ( params.typePass!='alphabet' ) {
+        if (phsaPassForce.totalNumberKey<params.rule.minNumberKey){
+            phsaPassForce.info = 'É necessário '+params.rule.minNumberKey+' caractere(s) numéricos!';
+            phsaPassForce.log = phsaPassForce.log + "\n" + phsaPassForce.info;
+            return outputPassForce(phsaPassForce);
+        }
     }
 
-    if (phsaPassForce.totalNumberKey<params.rule.minNumberKey){
-        phsaPassForce.info = 'É necessário '+params.rule.minNumberKey+' caractere(s) numéricos!';
-        phsaPassForce.log = phsaPassForce.log + "\n" + phsaPassForce.info;
-        return outputPassForce(phsaPassForce);
-    }
-
-    if (phsaPassForce.totalSymbolKey<params.rule.minSymbolKey){
-        phsaPassForce.info = 'É necessário '+params.rule.minSymbolKey+' caractere(s) especiais!';
-        phsaPassForce.log = phsaPassForce.log + "\n" + phsaPassForce.info;
-        return outputPassForce(phsaPassForce);
+    if ( params.notSymbolKey==false ) {
+        if (phsaPassForce.totalSymbolKey<params.rule.minSymbolKey){
+            phsaPassForce.info = 'É necessário '+params.rule.minSymbolKey+' caractere(s) especiais!';
+            phsaPassForce.log = phsaPassForce.log + "\n" + phsaPassForce.info;
+            return outputPassForce(phsaPassForce);
+        }
     }
 
     phsaPassForce.info      = 'Senha validada com sucesso!';
