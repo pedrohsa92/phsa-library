@@ -34,6 +34,9 @@ function outputPassForce(phsaPassForce){
         }
     }
 
+    var titleNecessary = "<strong class='"+phsaPassForce.class+"'>Necessário:</strong><br>";
+    phsaPassForce.htmlOutputRule = titleNecessary + phsaPassForce.htmlOutputRule;
+
     if (typeof(phsaPassForce.outputRule)==="object") {
         phsaPassForce.outputRule.html(phsaPassForce.htmlOutputRule);
     }else{
@@ -121,7 +124,7 @@ function phsaPassForce( input, params="") {
         input:          input,
         outputInfo:     null,
         outputRule:     null,
-        htmlOutputRule: "<b>Necessário:</b>",
+        htmlOutputRule: "",
         consoleLog:     params.consoleLog,
         log:            "Iniciando phsaPassForce...",
         debug:  {
@@ -245,11 +248,11 @@ function phsaPassForce( input, params="") {
 
     // Validation lenght
     if (password.length<params.minLenght) {
-        phsaPassForce.htmlOutputRule  += "<br><span class='"+phsaPassForce.classDanger+"'>"
+        phsaPassForce.htmlOutputRule  += "<span class='"+phsaPassForce.classDanger+"'>"
                         +params.minLenght+
                         " caracteres</span>";
     }else{
-        phsaPassForce.htmlOutputRule  += "<br><span class='"+phsaPassForce.classSuccess+"'>"
+        phsaPassForce.htmlOutputRule  += "<span class='"+phsaPassForce.classSuccess+"'>"
                         +params.minLenght+
                         " caracteres</span>";
     }
@@ -278,7 +281,7 @@ function phsaPassForce( input, params="") {
                 return outputPassForce(phsaPassForce);
             }
             phsaPassForce.totalLowKey++;
-            phsaPassForce.log = phsaPassForce.log + "\n" + 'Encontrei a letra minuscula ['+char+']';
+            phsaPassForce.log = phsaPassForce.log + "\n" + 'Encontrei a letra minúscula ['+char+']';
         }else if(char.match(/[A-Z]/)){
             if (params.typePass=='numeric') {
                 phsaPassForce.info = 'Não é permitido o uso de letras!';
@@ -286,7 +289,7 @@ function phsaPassForce( input, params="") {
                 return outputPassForce(phsaPassForce);
             }
             phsaPassForce.totalUpperKey++;
-            phsaPassForce.log = phsaPassForce.log + "\n" + 'Encontrei a letra maiuscula ['+char+']';
+            phsaPassForce.log = phsaPassForce.log + "\n" + 'Encontrei a letra maiúscula ['+char+']';
         }else if(Number.isInteger(+char)){
             if (params.typePass=='alphabet') {
                 phsaPassForce.info = 'Não é permitido o uso de números!';
@@ -321,11 +324,11 @@ function phsaPassForce( input, params="") {
                 if (phsaPassForce.totalLowKey<params.rule.minLowKey){
                     phsaPassForce.htmlOutputRule += "<br><span class='"+phsaPassForce.classDanger+"'>"
                     +params.rule[property]+
-                    " letra(s) minuscula (abc...)</span>";
+                    " letra(s) minúscula (abc...)</span>";
                 }else{
                     phsaPassForce.htmlOutputRule += "<br><span class='"+phsaPassForce.classSuccess+"'>"
                     +params.rule[property]+
-                    " letra(s) minuscula (abc...)</span>";
+                    " letra(s) minúscula (abc...)</span>";
                 }
             }
         }
@@ -334,11 +337,11 @@ function phsaPassForce( input, params="") {
                 if (phsaPassForce.totalUpperKey<params.rule.minUpperKey){
                     phsaPassForce.htmlOutputRule += "<br><span class='"+phsaPassForce.classDanger+"'>"
                     +params.rule[property]+
-                    " letra(s) maiuscula (ABC...)</span>";
+                    " letra(s) maiúscula (ABC...)</span>";
                 }else{
                     phsaPassForce.htmlOutputRule += "<br><span class='"+phsaPassForce.classSuccess+"'>"
                     +params.rule[property]+
-                    " letra(s) maiuscula (ABC...)</span>";
+                    " letra(s) maiúscula (ABC...)</span>";
                 }
             }
         }
@@ -403,13 +406,13 @@ function phsaPassForce( input, params="") {
 
     // Validation rules
     if (phsaPassForce.totalLowKey<params.rule.minLowKey){
-        phsaPassForce.info = 'É necessário '+params.rule.minLowKey+' caractere(s) minusculo!';
+        phsaPassForce.info = 'É necessário '+params.rule.minLowKey+' caractere(s) minúsculo!';
         phsaPassForce.log = phsaPassForce.log + "\n" + phsaPassForce.info;
         return outputPassForce(phsaPassForce);
     }
 
     if (phsaPassForce.totalUpperKey<params.rule.minUpperKey){
-        phsaPassForce.info = 'É necessário '+params.rule.minUpperKey+' caractere(s) maiusculo!';
+        phsaPassForce.info = 'É necessário '+params.rule.minUpperKey+' caractere(s) maiúsculo!';
         phsaPassForce.log = phsaPassForce.log + "\n" + phsaPassForce.info;
         return outputPassForce(phsaPassForce);
     }
@@ -426,7 +429,7 @@ function phsaPassForce( input, params="") {
         return outputPassForce(phsaPassForce);
     }
 
-    phsaPassForce.info      = 'Senha válidada com sucesso!';
+    phsaPassForce.info      = 'Senha validada com sucesso!';
     phsaPassForce.status    = true;
     phsaPassForce.class     = params.classSuccess;
     phsaPassForce.log       = phsaPassForce.log + "\n" + phsaPassForce.info;
