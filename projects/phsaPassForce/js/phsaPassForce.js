@@ -18,7 +18,7 @@ function validateParam(paramValue, paramDefault, paramType=""){
 
 // outputPassForce
 function outputPassForce(phsaPassForce){
-    if (typeof(phsaPassForce.outputInfo)==="object") {
+    if (typeof(phsaPassForce.outputInfo)==="object" && phsaPassForce.outputInfo!=null) {
         phsaPassForce.outputInfo.removeClass();
         phsaPassForce.outputInfo.addClass(phsaPassForce.class);
         phsaPassForce.outputInfo.html(phsaPassForce.info);
@@ -37,7 +37,7 @@ function outputPassForce(phsaPassForce){
     var titleNecessary = "<strong class='"+phsaPassForce.class+"'>Necessário:</strong><br>";
     phsaPassForce.htmlOutputRule = titleNecessary + phsaPassForce.htmlOutputRule;
 
-    if (typeof(phsaPassForce.outputRule)==="object") {
+    if (typeof(phsaPassForce.outputRule)==="object" && phsaPassForce.outputRule!=null) {
         phsaPassForce.outputRule.html(phsaPassForce.htmlOutputRule);
     }else{
         if (phsaPassForce.outputRule!='none') {
