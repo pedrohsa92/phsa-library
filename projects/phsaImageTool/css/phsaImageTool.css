@@ -1,6 +1,28 @@
-/**
-  Pedro HSA - Controle de imagem
+/*
+* PHSA Image Tools
+* Versão 2.0.0
+* 
+* Autor: Pedro HSA
+* Website: www.phsa.com.br
+* 
+* Descrição: Uma biblioteca CSS reutilizável com estilos elegantes e modernos para facilitar o uso de imagens em desenvolvimento web.
+* 
+* Licença: MIT
+* 
+* Copyright (c) 2023 - Pedro HSA
+* 
+* Permissão concedida, mediante atribuição de crédito, para qualquer pessoa obter uma cópia desta biblioteca e utilizá-la, 
+* incluindo o direito de usar, copiar, modificar, mesclar, publicar, distribuir, sublicenciar e/ou vender cópias da biblioteca,
+* sem restrições.
+* 
+* O software é fornecido "como está", sem qualquer tipo de garantia, expressa ou implícita, incluindo, mas não se limitando a, 
+* garantias de comercialização, adequação a uma finalidade específica e não infração. Em nenhum caso os autores ou detentores de 
+* direitos autorais serão responsáveis por qualquer reclamação, danos ou outras responsabilidades, seja em ação de contrato, 
+* delito ou de outra forma, decorrentes, de ou em conexão com o software ou o uso ou outros negócios na biblioteca.
+* 
+* Não remova ou altere este comentário de créditos.
 */
+
 :root {
   --altura-da-moldura: 20px;
   --largura-da-moldura: 20px;
