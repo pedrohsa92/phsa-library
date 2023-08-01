@@ -102,7 +102,7 @@
   height: 100%;
 }
 
-.molduraExterna .molduraInterna img {
+.molduraExterna .molduraInterna img, .molduraExterna .molduraInterna video {
   width: auto;
   max-width: 100%;
   max-height: 100%;
